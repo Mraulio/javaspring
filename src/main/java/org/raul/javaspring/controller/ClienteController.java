@@ -1,9 +1,7 @@
 package org.raul.javaspring.controller;
 
 import org.raul.javaspring.dto.ClienteDTO;
-import org.raul.javaspring.entity.Cliente;
-import org.raul.javaspring.mapper.ClienteMapper;
-import org.raul.javaspring.repository.ClienteRepository;
+
 import org.raul.javaspring.service.ClienteService;
 import org.springframework.web.bind.annotation.*;
 

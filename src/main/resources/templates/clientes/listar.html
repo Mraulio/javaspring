@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabla de Clientes</title>
+</head>
+<body>
+    <h1>Clientes</h1>
+    <a href="/web/clientes/crear">Añadir Cliente</a>
+    <table border="1">
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+        </tr>
+        <tr th:each="cliente : ${clientes}">
+            <td th:text="${cliente.nombre}"></td>
+            <td th:text="${cliente.email}"></td>
+            <td th:text="${cliente.telefono}"></td>
+            <td th:text="${cliente.direccion}"></td>
+        </tr>
+    </table>
+
+</body>
+</html>

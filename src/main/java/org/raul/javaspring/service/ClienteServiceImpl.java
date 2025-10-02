@@ -3,6 +3,7 @@ package org.raul.javaspring.service;
 
 import org.raul.javaspring.dto.ClienteDTO;
 import org.raul.javaspring.entity.Cliente;
+import org.raul.javaspring.exception.ClienteAlreadyExistsException;
 import org.raul.javaspring.mapper.ClienteMapper;
 import org.raul.javaspring.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class ClienteServiceImpl implements ClienteService{
     public ClienteDTO crearCliente(ClienteDTO clienteDTO){
         clienteRepository.findByEmail(clienteDTO.getEmail())
                 .ifPresent(c -> {
-                    throw new RuntimeException("El cliente ya existe con ese email");
+                    throw new ClienteAlreadyExistsException(clienteDTO.getEmail());
                 });
 
         Cliente cliente = ClienteMapper.toEntity(clienteDTO);

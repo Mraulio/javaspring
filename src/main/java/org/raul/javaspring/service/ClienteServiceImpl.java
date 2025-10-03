@@ -1,7 +1,9 @@
 package org.raul.javaspring.service;
 
 
+import org.raul.javaspring.dto.ClienteCreateDTO;
 import org.raul.javaspring.dto.ClienteDTO;
+import org.raul.javaspring.dto.ClienteUpdateDTO;
 import org.raul.javaspring.entity.Cliente;
 import org.raul.javaspring.exception.ClienteAlreadyExistsException;
 import org.raul.javaspring.mapper.ClienteMapper;
@@ -28,7 +30,8 @@ public class ClienteServiceImpl implements ClienteService{
     }
 
     @Override
-    public ClienteDTO crearCliente(ClienteDTO clienteDTO){
+    public ClienteDTO crearCliente(ClienteCreateDTO clienteDTO){
+        // Validar que no existe ningún cliente con ese mismo email
         clienteRepository.findByEmail(clienteDTO.getEmail())
                 .ifPresent(c -> {
                     throw new ClienteAlreadyExistsException(clienteDTO.getEmail());
@@ -37,5 +40,29 @@ public class ClienteServiceImpl implements ClienteService{
         Cliente cliente = ClienteMapper.toEntity(clienteDTO);
         Cliente saved = clienteRepository.save(cliente);
         return ClienteMapper.toDTO(saved);
+    }
+
+    @Override
+    public ClienteDTO actualizarCliente(Long id, ClienteUpdateDTO dto) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+
+        // Se actualizan solo los datos que vienen en el update DTO
+        ClienteMapper.updateEntity(dto, cliente);
+
+        Cliente updated = clienteRepository.save(cliente);
+        return ClienteMapper.toDTO(updated);
+    }
+
+    @Override
+    public void eliminarCliente(Long id) {
+        clienteRepository.deleteById(id);
+    }
+
+    @Override
+    public ClienteDTO obtenerClientePorId(Long id) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+        return ClienteMapper.toDTO(cliente);
     }
 }

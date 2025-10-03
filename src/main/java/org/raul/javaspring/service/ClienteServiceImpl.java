@@ -6,6 +6,7 @@ import org.raul.javaspring.dto.ClienteDTO;
 import org.raul.javaspring.dto.ClienteUpdateDTO;
 import org.raul.javaspring.entity.Cliente;
 import org.raul.javaspring.exception.ClienteAlreadyExistsException;
+import org.raul.javaspring.exception.ClienteNotFoundException;
 import org.raul.javaspring.mapper.ClienteMapper;
 import org.raul.javaspring.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,7 @@ public class ClienteServiceImpl implements ClienteService{
     @Override
     public ClienteDTO actualizarCliente(Long id, ClienteUpdateDTO dto) {
         Cliente cliente = clienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+                .orElseThrow(() -> new ClienteNotFoundException(id));
 
         // Se actualizan solo los datos que vienen en el update DTO
         ClienteMapper.updateEntity(dto, cliente);
@@ -62,7 +63,7 @@ public class ClienteServiceImpl implements ClienteService{
     @Override
     public ClienteDTO obtenerClientePorId(Long id) {
         Cliente cliente = clienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+                .orElseThrow(() -> new ClienteNotFoundException(id));
         return ClienteMapper.toDTO(cliente);
     }
 }

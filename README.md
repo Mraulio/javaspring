@@ -21,4 +21,9 @@ Antes de ejecutar la aplicación, asegúrate de tener desplegada y accesible una
 
 La aplicación está configurada para leer las credenciales de conexión desde **variables de entorno**.  
 Durante el desarrollo puedes definirlas directamente en tu IDE (por ejemplo, en IntelliJ: `Run > Edit Configurations > Environment > Variables`).  
-En entornos de prueba o producción, deben establecerse como variables de entorno del sistema.  
+En entornos de prueba o producción, deben establecerse como variables de entorno del sistema.
+
+### Docker (opcional, para desarrollo local)
+
+Se incluye un archivo `docker-compose.example.yml` como referencia.  
+Para usarlo, crea tu propio `docker-compose.yml` basado en este archivo y define las credenciales mediante variables de entorno.

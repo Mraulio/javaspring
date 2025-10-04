@@ -15,4 +15,6 @@ public interface ClienteService {
     void eliminarCliente(Long id);
 
     ClienteDTO obtenerClientePorId(Long id);
+
+    List<ClienteDTO> buscarClientes(String nombre, String email, String telefono);
 }

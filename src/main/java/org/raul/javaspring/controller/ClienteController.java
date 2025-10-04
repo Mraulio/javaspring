@@ -30,6 +30,15 @@ public class ClienteController {
         return clienteService.obtenerClientePorId(id);
     }
 
+    @GetMapping("/buscar")
+    public List<ClienteDTO> buscarClientes(
+            @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String telefono
+    ) {
+        return clienteService.buscarClientes(nombre, email, telefono);
+    }
+
     @PostMapping
     public ClienteDTO crearCliente(@Valid @RequestBody ClienteCreateDTO dto) {
         return clienteService.crearCliente(dto);

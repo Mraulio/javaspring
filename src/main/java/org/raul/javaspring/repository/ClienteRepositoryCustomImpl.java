@@ -19,7 +19,7 @@ public class ClienteRepositoryCustomImpl implements ClienteRepositoryCustom {
     private EntityManager em;
 
     @Override
-    public List<Cliente> buscarPorFiltros(String nombre, String email) {
+    public List<Cliente> buscarPorFiltros(String nombre, String email, String telefono) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Cliente> cq = cb.createQuery(Cliente.class);
         Root<Cliente> cliente = cq.from(Cliente.class);
@@ -32,6 +32,10 @@ public class ClienteRepositoryCustomImpl implements ClienteRepositoryCustom {
 
         if (email != null && !email.isEmpty()) {
             predicates.add(cb.like(cliente.get("email"), "%" + email + "%"));
+        }
+
+        if (telefono != null && !telefono.isEmpty()) {
+            predicates.add(cb.like(cliente.get("telefono"), "%" + telefono + "%"));
         }
 
         cq.select(cliente)

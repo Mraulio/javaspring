@@ -5,5 +5,5 @@ import org.raul.javaspring.entity.Cliente;
 import java.util.List;
 
 public interface ClienteRepositoryCustom {
-    List<Cliente> buscarPorFiltros(String nombre, String email);
+    List<Cliente> buscarPorFiltros(String nombre, String email, String telefono);
 }

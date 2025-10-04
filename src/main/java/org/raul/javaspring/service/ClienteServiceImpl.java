@@ -9,6 +9,7 @@ import org.raul.javaspring.exception.ClienteAlreadyExistsException;
 import org.raul.javaspring.exception.ClienteNotFoundException;
 import org.raul.javaspring.mapper.ClienteMapper;
 import org.raul.javaspring.repository.ClienteRepository;
+import org.raul.javaspring.repository.ClienteRepositoryCustom;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -66,4 +67,18 @@ public class ClienteServiceImpl implements ClienteService{
                 .orElseThrow(() -> new ClienteNotFoundException(id));
         return ClienteMapper.toDTO(cliente);
     }
+
+    @Override
+    public List<ClienteDTO> buscarClientes(String nombre, String email, String telefono) {
+        List<ClienteDTO> results = clienteRepository.buscarPorFiltros(nombre, email, telefono)
+                .stream()
+                .map(ClienteMapper::toDTO)
+                .toList();
+
+        if (results.isEmpty()) {
+            throw new ClienteNotFoundException("No se encontraron clientes con esos filtros");
+        }
+        return results;
+    }
+
 }

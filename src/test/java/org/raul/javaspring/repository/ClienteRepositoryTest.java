@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -28,5 +30,19 @@ public class ClienteRepositoryTest {
         assertNotNull(saved.getId());
         assertEquals("Paco", saved.getNombre());
         assertTrue(clienteRepository.findById(saved.getId()).isPresent());
+    }
+
+    @Test
+    void buscarPorFiltrosCustom() {
+        Cliente cliente = new Cliente();
+        cliente.setNombre("Juan");
+        cliente.setEmail("juan@test.com");
+        cliente.setTelefono("111222333");
+        cliente.setDireccion("Calle Test");
+        clienteRepository.save(cliente);
+
+        List<Cliente> resultados = clienteRepository.buscarPorFiltros("Juan", "juan@test.com", null);
+        assertEquals(1, resultados.size());
+        assertEquals("Juan", resultados.get(0).getNombre());
     }
 }

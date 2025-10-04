@@ -13,6 +13,7 @@ Proyecto de ejemplo con Spring Boot para gestionar clientes. Permite listar, cre
 - Validation (`jakarta.validation`)
 - REST API
 - Thymeleaf
+- Bootstrap
 - Control de excepciones global (`@RestControllerAdvice`)
 
 ## Configuración de la base de datos

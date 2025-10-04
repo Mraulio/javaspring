@@ -7,6 +7,16 @@
 <body>
     <h1>Clientes</h1>
     <a href="/web/clientes/crear">Añadir Cliente</a>
+    <form th:action="@{/web/clientes/buscar}" method="get">
+        <label>Nombre:</label>
+        <input type="text" name="nombre" />
+        <label>Email:</label>
+        <input type="text" name="email" />
+        <label>Teléfono:</label>
+        <input type="text" name="telefono" />
+        <button type="submit">Buscar</button>
+    </form>
+    <hr/>
     <table border="1">
         <tr>
             <th>Nombre</th>

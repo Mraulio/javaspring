@@ -3,9 +3,9 @@ services:
     image: gvenzl/oracle-xe:21-slim
     container_name: oracle-xe
     environment:
-      ORACLE_PASSWORD: 12345
-      APP_USER: raul
-      APP_USER_PASSWORD: 12345
+      ORACLE_PASSWORD: mypass
+      APP_USER: myuser
+      APP_USER_PASSWORD: mypass
     ports:
       - "1521:1521"
 
